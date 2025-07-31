@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=TextEdit
+Comment=Dark mode text editor
+Exec=textedit %F
+Icon=text-editor
+Type=Application
+Categories=TextEditor;Utility;
+MimeType=text/plain;text/markdown;text/x-python;
+StartupNotify=true
