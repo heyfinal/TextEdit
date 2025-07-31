@@ -154,6 +154,27 @@ class TextEditApp:
         )
         self.text_editor.pack(fill=tk.BOTH, expand=True)
         
+        # Add default TextEdit ASCII banner
+        default_text = """                                                                      
+                                                     ,,    ,,         
+MMP""MM""YMM                 mm   `7MM"""YMM       `7MM    db   mm    
+P'   MM   `7                 MM     MM    `7         MM         MM    
+     MM  .gP"Ya `7M'   `MF'mmMMmm   MM   d      ,M""bMM  `7MM mmMMmm  
+     MM ,M'   Yb  `VA ,V'    MM     MMmmMM    ,AP    MM    MM   MM    
+     MM 8M""""""    XMX      MM     MM   Y  , 8MI    MM    MM   MM    
+     MM YM.    ,  ,V' VA.    MM     MM     ,M `Mb    MM    MM   MM    
+   .JMML.`Mbmmd'.AM.   .MA.  `Mbmo.JMMmmmmMMM  `Wbmd"MML..JMML. `Mbmo 
+                                                                      
+                                                                      
+
+
+Welcome to TextEdit - The permanent dark mode text editor!
+
+Click anywhere to start editing...
+"""
+        self.text_editor.insert(1.0, default_text)
+        self.has_default_text = True
+        
         # Configure scrollbar colors
         self.text_editor.vbar.config(
             bg=self.colors['menu_bg'],
@@ -163,7 +184,7 @@ class TextEditApp:
         
         # Bind text change events
         self.text_editor.bind('<KeyPress>', self.on_text_change)
-        self.text_editor.bind('<Button-1>', self.on_cursor_move)
+        self.text_editor.bind('<Button-1>', self.on_click)
         self.text_editor.bind('<KeyRelease>', self.on_cursor_move)
         
     def apply_dark_theme(self):
@@ -237,6 +258,10 @@ class TextEditApp:
     
     def on_text_change(self, event=None):
         """Handle text changes"""
+        # Clear default text on first edit
+        if hasattr(self, 'has_default_text') and self.has_default_text:
+            self.clear_default_text()
+        
         self.modified = True
         self.update_title()
         self.root.after_idle(self.update_cursor_position)
@@ -244,6 +269,22 @@ class TextEditApp:
     def on_cursor_move(self, event=None):
         """Handle cursor movement"""
         self.root.after_idle(self.update_cursor_position)
+    
+    def on_click(self, event=None):
+        """Handle mouse clicks"""
+        # Clear default text on first click
+        if hasattr(self, 'has_default_text') and self.has_default_text:
+            self.clear_default_text()
+        self.on_cursor_move(event)
+    
+    def clear_default_text(self):
+        """Clear the default ASCII banner text"""
+        if hasattr(self, 'has_default_text') and self.has_default_text:
+            self.text_editor.delete(1.0, tk.END)
+            self.has_default_text = False
+            self.modified = False
+            self.update_title()
+            self.update_status("Ready to edit...")
     
     def update_recent_menu(self):
         """Update recent files menu"""
@@ -272,6 +313,28 @@ class TextEditApp:
                 return
         
         self.text_editor.delete(1.0, tk.END)
+        
+        # Add default TextEdit ASCII banner for new files
+        default_text = """                                                                      
+                                                     ,,    ,,         
+MMP""MM""YMM                 mm   `7MM"""YMM       `7MM    db   mm    
+P'   MM   `7                 MM     MM    `7         MM         MM    
+     MM  .gP"Ya `7M'   `MF'mmMMmm   MM   d      ,M""bMM  `7MM mmMMmm  
+     MM ,M'   Yb  `VA ,V'    MM     MMmmMM    ,AP    MM    MM   MM    
+     MM 8M""""""    XMX      MM     MM   Y  , 8MI    MM    MM   MM    
+     MM YM.    ,  ,V' VA.    MM     MM     ,M `Mb    MM    MM   MM    
+   .JMML.`Mbmmd'.AM.   .MA.  `Mbmo.JMMmmmmMMM  `Wbmd"MML..JMML. `Mbmo 
+                                                                      
+                                                                      
+
+
+Welcome to TextEdit - The permanent dark mode text editor!
+
+Click anywhere to start editing...
+"""
+        self.text_editor.insert(1.0, default_text)
+        self.has_default_text = True
+        
         self.current_file = None
         self.modified = False
         self.update_title()

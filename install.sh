@@ -4,6 +4,25 @@
 
 set -e
 
+# Clear screen and show banner
+clear
+
+# TextEdit ASCII Banner
+cat << 'EOF'
+                                                                      
+                                                     ,,    ,,         
+MMP""MM""YMM                 mm   `7MM"""YMM       `7MM    db   mm    
+P'   MM   `7                 MM     MM    `7         MM         MM    
+     MM  .gP"Ya `7M'   `MF'mmMMmm   MM   d      ,M""bMM  `7MM mmMMmm  
+     MM ,M'   Yb  `VA ,V'    MM     MMmmMM    ,AP    MM    MM   MM    
+     MM 8M""""""    XMX      MM     MM   Y  , 8MI    MM    MM   MM    
+     MM YM.    ,  ,V' VA.    MM     MM     ,M `Mb    MM    MM   MM    
+   .JMML.`Mbmmd'.AM.   .MA.  `Mbmo.JMMmmmmMMM  `Wbmd"MML..JMML. `Mbmo 
+                                                                      
+                                                                      
+
+EOF
+
 echo "🚀 TextEdit Auto-Installer"
 echo "========================="
 
