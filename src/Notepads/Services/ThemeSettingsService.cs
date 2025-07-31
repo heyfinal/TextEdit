@@ -33,23 +33,13 @@ namespace Notepads.Services
 
         public static bool UseWindowsTheme
         {
-            get => _useWindowsTheme;
+            get => false; // Always return false - we don't follow Windows theme
             set
             {
-                if (value != _useWindowsTheme)
-                {
-                    _useWindowsTheme = value;
-                    if (value)
-                    {
-                        var currentWindowsTheme = Application.Current.RequestedTheme.ToElementTheme();
-                        if (ThemeMode != currentWindowsTheme)
-                        {
-                            ThemeMode = currentWindowsTheme;
-                            OnThemeChanged?.Invoke(null, ThemeMode);
-                        }
-                    }
-                    ApplicationSettingsStore.Write(SettingsKey.UseWindowsThemeBool, _useWindowsTheme);
-                }
+                // Ignore any attempts to change theme mode - we stay dark
+                _useWindowsTheme = false;
+                ThemeMode = ElementTheme.Dark;
+                ApplicationSettingsStore.Write(SettingsKey.UseWindowsThemeBool, false);
             }
         }
 
@@ -176,29 +166,12 @@ namespace Notepads.Services
 
         private static void InitializeThemeMode()
         {
-            if (ApplicationSettingsStore.Read(SettingsKey.UseWindowsThemeBool) is bool useWindowsTheme)
-            {
-                _useWindowsTheme = useWindowsTheme;
-            }
-            else
-            {
-                _useWindowsTheme = true;
-            }
-
-            ThemeListener.ThemeChanged += ThemeListener_ThemeChanged;
-
-            ThemeMode = Application.Current.RequestedTheme.ToElementTheme();
-
-            if (!UseWindowsTheme)
-            {
-                if (ApplicationSettingsStore.Read(SettingsKey.RequestedThemeStr) is string themeModeStr)
-                {
-                    if (Enum.TryParse(typeof(ElementTheme), themeModeStr, out var theme))
-                    {
-                        ThemeMode = (ElementTheme)theme;
-                    }
-                }
-            }
+            // Force permanent dark mode for TextEdit
+            _useWindowsTheme = false;
+            ThemeMode = ElementTheme.Dark;
+            
+            // Don't listen to system theme changes - we stay dark
+            // ThemeListener.ThemeChanged += ThemeListener_ThemeChanged;
         }
 
         private static void ThemeListener_ThemeChanged(ThemeListener sender)
@@ -211,6 +184,8 @@ namespace Notepads.Services
 
         public static void SetTheme(ElementTheme theme)
         {
+            // Force dark mode - ignore any theme change requests
+            theme = ElementTheme.Dark;
             if (ThemeMode != theme)
             {
                 ThemeMode = theme;

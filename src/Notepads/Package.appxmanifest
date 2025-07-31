@@ -11,12 +11,12 @@
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          IgnorableNamespaces="mp uap uap5 uap10 desktop4 iot2 rescap">
   
-  <Identity Name="19282JackieLiu.Notepads-Beta" Publisher="CN=40E66D07-5A3A-4954-9CA3-A1EB15ED0804" Version="1.5.6.0" />
+  <Identity Name="TextEdit" Publisher="CN=40E66D07-5A3A-4954-9CA3-A1EB15ED0804" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="df234254-de03-48f0-80a0-11b5082ec740" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   
   <Properties>
-    <DisplayName>Notepads App</DisplayName>
-    <PublisherDisplayName>Jackie Liu</PublisherDisplayName>
+    <DisplayName>TextEdit</DisplayName>
+    <PublisherDisplayName>TextEdit Team</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   
@@ -34,15 +34,15 @@
                  EntryPoint="Notepads.App"
                  desktop4:SupportsMultipleInstances="true"
                  iot2:SupportsMultipleInstances="true">
-      <uap:VisualElements DisplayName="Notepads"
+      <uap:VisualElements DisplayName="TextEdit"
                           Square150x150Logo="Assets\Square150x150Logo.png"
                           Square44x44Logo="Assets\Square44x44Logo.png"
-                          Description="A modern, lightweight text editor with a minimalist design."
-                          BackgroundColor="transparent">
+                          Description="TextEdit - A modern dark-themed text editor with permanent dark mode."
+                          BackgroundColor="#2f2f2f">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"
                          Square71x71Logo="Assets\SmallTile.png"
                          Square310x310Logo="Assets\LargeTile.png"
-                         ShortName="Notepads">
+                         ShortName="TextEdit">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />
@@ -54,14 +54,14 @@
       
       <Extensions>
         <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="notepads">
+          <uap:Protocol Name="textedit">
             <uap:Logo>Assets\appicon_w.png</uap:Logo>
-            <uap:DisplayName>Notepads URI Scheme</uap:DisplayName>
+            <uap:DisplayName>TextEdit URI Scheme</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
-        <uap5:Extension Category="windows.appExecutionAlias" Executable="Notepads.exe" EntryPoint="Notepads.App">
+        <uap5:Extension Category="windows.appExecutionAlias" Executable="TextEdit.exe" EntryPoint="TextEdit.App">
           <uap5:AppExecutionAlias>
-            <uap5:ExecutionAlias Alias="Notepads.exe" />
+            <uap5:ExecutionAlias Alias="TextEdit.exe" />
           </uap5:AppExecutionAlias>
         </uap5:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">

@@ -7,8 +7,8 @@
     <ProjectGuid>{99274932-9E86-480C-8142-38525F80007D}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Notepads</RootNamespace>
-    <AssemblyName>Notepads</AssemblyName>
+    <RootNamespace>TextEdit</RootNamespace>
+    <AssemblyName>TextEdit</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22621.0</TargetPlatformVersion>
